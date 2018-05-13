@@ -1,34 +1,53 @@
 #include <iostream>
 #include <clocale>
 
-int C (int n, int k);
-int calculate (int p);
+long long int C (int n, int k);
+long long int calculate (long long int p);
 
 int main(int argc, const char * argv[]) {
     
     int k = 0, n = 0;
     std::cin >> k;
     std::cin >> n;
-    int p = C (n, k);
-    std::cout << calculate(p) % 1000000007;
+    long long int p = C (n, k);
+    std::cout << calculate(p);
     return 0;
 }
 
-int calculate (int p)
-{
-    int a = p, ans = p == 1 ? 1 : 2;
-    for(int i = 2; i * i <= a; i++)
-    {
-        if(p % i != 0) continue;
-        int j = p / i;
-        ans += 2 - !!(i == j);
+long long int calculate (long long int p){
+    
+    long long int result = 0;
+    
+    for (long long int i = 1; i <= p; i ++){
+        if (p % i == 0){
+            result ++;
+        }
     }
-    return ans;
+    return result;
 }
 
-int C (int n, int k) {
-    double res = 1;
-    for (int i=1; i<=k; ++i)
-        res = res * (n-k+i) / i;
-    return (int) (res + 0.01);
+long long int C (int n, int k) {
+    long long int ans = 0;
+     long long int fac_n = 1;
+     long long int fac_k = 1;
+     long long int fac_nk = 1;
+     
+     if(n == 0){
+     return 0;
+     }
+     if (k == 0){
+     return 1;
+     }
+     
+     for (int i = n; i > 1; i --){
+     fac_n = fac_n * i ;
+     }
+     for (long long int i = k; i > 1; i --){
+     fac_k = fac_k * i % 1000000007;
+     }
+     for (int i = n-k; i > 1; i --){
+     fac_nk = fac_nk * i % 1000000007;
+     }
+     ans = fac_n/((fac_k * fac_nk) % 1000000007);
+     return ans;
 }

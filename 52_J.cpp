@@ -7,7 +7,7 @@ int main(int argc, const char * argv[]) {
     unsigned int N = 0;
     std::cin >> N;
     
-    int result = 0;
+    long long int result = 0;
     map<int, int> array;
     
     for (int i = 0; i < N; i ++){
